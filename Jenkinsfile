@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'node:lts-slim'
-            args '-p 3000:3000 -p 5000:5000'
+            image 'node:lts'
+            args '-p 3000:3000 -p 5000:5000 --network host'
         }
     }
     environment {
@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh 'yarn install'
             }
         }
         stage('Test') {
